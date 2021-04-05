@@ -1,62 +1,3 @@
-"""
-dict_activity_diagram = {
-  "name": "test"
-  "ActivityDiagramElements": [
-    {
-        "type": "StartNode",
-        "name": "nome do start node"
-    },
-    {
-        "type": "Activity",
-        "name": "nome da atividade"
-    },
-    {
-        "type": "DecisionNode",
-        "name": "nome do nodo de decisao"
-    },
-    {
-        "type": "MergeNode",
-        "name": "nome da atividade"
-    },
-    {
-       "type": "FinalNode",
-        "name": "nome do nodo final"
-    },
-  ],
-  "ActivityDiagramTransitions": [
-    {
-      "name": "transition name",
-      "prob": 1,
-      "source": "node inicial",
-      "target": "node final"
-    }
-  ]
-}
-"""
-
-"""
-<ActivityDiagram name=‘‘nome do diagrama’’>
-  <ActivityDiagramElements>
-    <StartNode name=‘‘nome do nodo inicial’’/>
-    <Activity name=‘‘atividade 1’’/>
-    <DecisionNode name=‘‘nome do nodo de decisao’’/>
-    <Activity name=‘‘atividade 2’’/>
-    <MergeNode name=‘‘nome do nodo de fusao’’/>
-    <Activity name=‘‘atividade 3’’/>
-    <FinalNode name=‘‘nome do nodo final’’/>
-  </ActivityDiagramElements> 
-  <ActivityDiagramTransitions>
-    <Transition source="nome do nodo inicial" target="atividade 1" name=‘‘nome da transicao’’ prob="1" />
-    <Transition source="atividade 1" target="atividade 2" name=‘‘nome da transicao’’ prob="1" />
-    <Transition source="nome do nodo inicial" target="atividade 1" name=‘‘nome da transicao’’ prob="1" />
-    <Transition source="nome do nodo inicial" target="atividade 1" name=‘‘nome da transicao’’ prob="1" />
-    <Transition source="nome do nodo inicial" target="atividade 1" name=‘‘nome da transicao’’ prob="1" />
-    <Transition source="nome do nodo inicial" target="atividade 1" name=‘‘nome da transicao’’ prob="1" />
-    <Transition source="nome do nodo inicial" target="atividade 1" name=‘‘nome da transicao’’ prob="1" />
-  </ActivityDiagramTransitions>
-</ActivityDiagram>
-"""
-
 class Node:
     def __init__(self, name):
         self.name=name
@@ -72,7 +13,7 @@ class Node:
         self.source_qtd=self.source_qtd+1
     
     def add_target_qtd(self):
-        self.source_qtd=self.target_qtd+1
+        self.target_qtd=self.target_qtd+1
 
 class StartNode(Node):
     def __init__(self, name):
