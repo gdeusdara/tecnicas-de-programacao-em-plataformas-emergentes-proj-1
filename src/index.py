@@ -26,8 +26,10 @@ def diagram_tool(activity_diagram, sequence_diagrams):
           if not found_diagram:
               raise Exception("ActivityRepresentationException")
 
-  diagram1.getXml()
-  diagram2.getXml()
+  with open('diagrams.xml', 'w+') as f:
+    diagram1.getXml(f)
+    diagram2.getXml(f)
+
 
 dict_activity_diagram = {
   "name": "test",

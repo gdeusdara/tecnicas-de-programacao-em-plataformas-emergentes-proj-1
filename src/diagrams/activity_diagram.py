@@ -203,19 +203,19 @@ class ActivityDiagram:
     def getElements(self):
         return self.elements
 
-    def getXml(self):
+    def getXml(self, file):
         
-        print('<ActivityDiagram name="{}">'.format(self.name))
-        print('\t<ActivityDiagramElements>')
+        print('<ActivityDiagram name="{}">'.format(self.name), file=file)
+        print('\t<ActivityDiagramElements>', file=file)
 
         for element in self.elements:
-            print('\t\t<{} name="{}"/>'.format(element.type, element.name))
+            print('\t\t<{} name="{}"/>'.format(element.type, element.name), file=file)
 
-        print('\t</ActivityDiagramElements>')
-        print('\t<ActivityDiagramTransitions>')
+        print('\t</ActivityDiagramElements>', file=file)
+        print('\t<ActivityDiagramTransitions>', file=file)
 
         for transition in self.transitions:
-            print('\t\t<Transition source="{}" target="{}" name="{}" prob="{}" />'.format(transition.source, transition.target, transition.name, transition.prob))
+            print('\t\t<Transition source="{}" target="{}" name="{}" prob="{}" />'.format(transition.source, transition.target, transition.name, transition.prob), file=file)
 
-        print('\t</ActivityDiagramTransitions>')
-        print('</ActivityDiagram>')
+        print('\t</ActivityDiagramTransitions>', file=file)
+        print('</ActivityDiagram>', file=file)

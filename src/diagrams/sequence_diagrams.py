@@ -77,27 +77,27 @@ class SequenceDiagrams():
         return self.diagrams
 
 
-    def getXml(self):
+    def getXml(self, file):
         
-        print('<SequenceDiagrams>')
-        print('\t<Lifelines>')
+        print('<SequenceDiagrams>', file=file)
+        print('\t<Lifelines>', file=file)
         for lifeline in self.lifelines:
-            print('\t\t<Lifeline name="{}" />'.format(lifeline.name))
-        print('\t</Lifelines>')
+            print('\t\t<Lifeline name="{}" />'.format(lifeline.name), file=file)
+        print('\t</Lifelines>', file=file)
     
-        print('\t<Fragments>')
+        print('\t<Fragments>', file=file)
         for fragment in self.fragments:
-            print('\t\t<Optional name="{}" representedBy="{}" />'.format(fragment.name, fragment.representedBy))
-        print('\t</Fragments>')
+            print('\t\t<Optional name="{}" representedBy="{}" />'.format(fragment.name, fragment.representedBy), file=file)
+        print('\t</Fragments>', file=file)
         for diagram in self.diagrams:
-            print('\t<SequenceDiagram name="{}" guardCondition="{}">'.format(diagram.name, diagram.guard_condition))
+            print('\t<SequenceDiagram name="{}" guardCondition="{}">'.format(diagram.name, diagram.guard_condition), file=file)
             for element in diagram.elements:
                 if element.type == 'Message':   
-                    print('\t\t<Message type="{}" name="{}" prob="{}" source="{}" target="{}" />'.format(element.message_type, element.name, element.prob, element.source, element.target))
+                    print('\t\t<Message type="{}" name="{}" prob="{}" source="{}" target="{}" />'.format(element.message_type, element.name, element.prob, element.source, element.target), file=file)
                 else:
-                    print('\t\t<Fragment name="{}" />'.format(element.name))
+                    print('\t\t<Fragment name="{}" />'.format(element.name), file=file)
 
-            print('\t</SequenceDiagram>')
-        print('<SequenceDiagrams>')
+            print('\t</SequenceDiagram>', file=file)
+        print('<SequenceDiagrams>', file=file)
 
 
