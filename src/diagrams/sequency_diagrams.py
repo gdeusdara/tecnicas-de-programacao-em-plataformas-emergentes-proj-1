@@ -5,17 +5,19 @@ class SequenceElement:
 
 class FragmentReference(SequenceElement):
     def __init__(self, name):
-      super().__init__(name)
-      self.type='Fragment'
+        super().__init__(name)
+        self.type='Fragment'
 
 class Message(SequenceElement):
     def __init__(self, name, message_type, prob, source, target):
-      super().__init__(name)
-      self.type='Message'
-      self.message_type=message_type
-      self.prob=prob
-      self.source=source
-      self.target=target
+        super().__init__(name)
+        self.type='Message'
+        if message_type != 'sync' and message_type != 'async' and message_type != 'reply':
+            raise Exception("InvalideMessageTypeException")
+        self.message_type=message_type
+        self.prob=prob
+        self.source=source
+        self.target=target
 
 class Fragment:
     def __init__(self, name, representedBy):
@@ -68,7 +70,7 @@ class SequenceDiagrams():
         print('<SequenceDiagrams>')
         print('\t<Lifelines>')
         for lifeline in self.lifelines:
-              print('\t\t<Lifeline name="{}" />'.format(lifeline.name))
+            print('\t\t<Lifeline name="{}" />'.format(lifeline.name))
         print('\t</Lifelines>')
     
         print('\t<Fragments>')
@@ -79,9 +81,11 @@ class SequenceDiagrams():
             print('\t<SequenceDiagram name="{}" guardCondition="{}">'.format(diagram.name, diagram.guard_condition))
             for element in diagram.elements:
                 if element.type == 'Message':   
-                    print('\t\t<Message name="{}" prob="{}" source="{}" target="{}" />'.format(element.name, element.prob, element.source, element.target))
+                    print('\t\t<Message type="{}" name="{}" prob="{}" source="{}" target="{}" />'.format(element.message_type, element.name, element.prob, element.source, element.target))
                 else:
                     print('\t\t<Fragment name="{}" />'.format(element.name))
 
             print('\t</SequenceDiagram>')
+        print('<SequenceDiagrams>')
+
 
