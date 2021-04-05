@@ -98,6 +98,7 @@ dict_activity_diagram = {
 class Node:
     def __init__(self, name):
         self.name=name
+        self.type=''
         self.source_qtd=0
         self.target_qtd=0
         self.max_source=0
@@ -108,6 +109,7 @@ class Node:
 class StartNode(Node):
     def __init__(self, name):
         super().__init__(name)
+        self.type='StartNode'
         self.has_max_target=True
         self.has_max_source=True
         self.max_source=1
@@ -115,6 +117,7 @@ class StartNode(Node):
 class Activity(Node):
     def __init__(self, name):
         super().__init__(name)
+        self.type='Activity'
         self.has_max_target=True
         self.max_target=1
         self.has_max_source=True
@@ -124,18 +127,21 @@ class Activity(Node):
 class DecisionNode(Node):
     def __init__(self, name):
         super().__init__(name)
+        self.type='DecisionNode'
         self.has_max_target=True
         self.max_target=1
 
 class MergeNode(Node):
     def __init__(self, name):
         super().__init__(name)
+        self.type='MergeNode'
         self.has_max_source=True
         self.max_source=1
 
 class FinalNode(Node):
     def __init__(self, name):
         super().__init__(name)
+        self.type='FinalNode'
         self.has_max_target=True
         self.has_max_source=True
         self.max_target=1
@@ -152,36 +158,33 @@ class Transition:
 class ActivityDiagram:
     def __init__(self, diagram):
         self.name=diagram["name"]
-        self.start_node=None
-        self.activities=[]
-        self.decision_nodes=[]
-        self.merge_nodes=[]
-        self.final_nodes=[]
+        self.elements=[]
         self.transitions=[]
 
         for element in diagram["ActivityDiagramElements"]:
             if element["type"] == "StartNode":
-                if self.start_node == None:
-                    self.start_node=StartNode(element["name"])
-                else:
-                    raise Exception("ActivityDiagramRuleException")
+                self.elements.append(StartNode(element["name"]))
 
             if element["type"] == "Activity":
                 node=Activity(element["name"])
-                self.activities.append(node)
+                self.elements.append(node)
 
             if element["type"] == "DecisionNode":
                 node=DecisionNode(element["name"])
-                self.decision_nodes.append(node)
+                self.elements.append(node)
 
             if element["type"] == "MergeNode":
                 node=MergeNode(element["name"])
-                self.merge_nodes.append(node)
+                self.elements.append(node)
 
             if element["type"] == "FinalNode":
                 node=FinalNode(element["name"])
-                self.final_nodes.append(node)
+                self.elements.append(node)
 
+        # if self.start_node == None:
+        #     raise Exception("ActivityDiagramRuleException")
+        # if len(self.final_node) == 0:
+        #     raise Exception("ActivityDiagramRuleException")
 
         for transition in diagram["ActivityDiagramTransitions"]:
             node=Transition(transition["name"], transition["prob"], transition["source"], transition["target"])
@@ -191,19 +194,9 @@ class ActivityDiagram:
         
         print('<ActivityDiagram name="{}">'.format(self.name))
         print('\t<ActivityDiagramElements>')
-        print('\t\t<StartNode name="{}"/>'.format(self.start_node.name))
 
-        for activity in self.activities:
-            print('\t\t<Activity name="{}"/>'.format(activity.name))
-        
-        for decision_node in self.decision_nodes:
-            print('\t\t<DecisionNode name="{}"/>'.format(decision_node.name))
-
-        for merge_node in self.merge_nodes:
-            print('\t\t<MergeNode name="{}"/>'.format(merge_node.name))
-        
-        for final_node in self.final_nodes:
-            print('\t\t<FinalNode name="{}"/>'.format(final_node.name))
+        for element in self.elements:
+            print('\t\t<{} name="{}"/>'.format(element.type, element.name))
 
         print('\t</ActivityDiagramElements>')
         print('\t<ActivityDiagramTransitions>')
@@ -213,9 +206,3 @@ class ActivityDiagram:
 
         print('\t</ActivityDiagramTransitions>')
         print('</ActivityDiagram>')
-
-        # print(self.activities)
-        # print(self.decision_nodes)
-        # print(self.merge_nodes)
-        # print(self.final_nodes)
-        # print(self.transitions)
