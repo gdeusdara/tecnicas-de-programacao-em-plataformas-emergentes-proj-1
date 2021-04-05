@@ -55,44 +55,6 @@ dict_activity_diagram = {
     <Transition source="nome do nodo inicial" target="atividade 1" name=‘‘nome da transicao’’ prob="1" />
   </ActivityDiagramTransitions>
 </ActivityDiagram>
-
-<SequenceDiagrams>
-  <Lifelines>
-    <Lifeline name=‘‘nome da lifeline’’ />
-    <Lifeline name=‘‘nome da lifeline’’
-    <Lifeline name=‘‘nome da lifeline’’ />
-  </Lifelines> /> 
-
-  <Fragments>
-    <Optional name=‘‘nome do fragmento’’ representedBy=‘‘nome do diagrama de sequencia’’/>
-    <Optional name=‘‘nome do fragmento’’ representedBy=‘‘nome do diagrama de sequencia’’/>
-    <Optional name=‘‘nome do fragmento’’ representedBy=‘‘nome do diagrama de sequencia’’/>
-    ...
-  </Fragments>
-
-  <SequenceDiagram name=‘‘atividade 1’’>
-    <Message name=‘‘nome da mensagem’’ prob=‘‘valor da probabilidade’’ source=‘‘nome da lifeline’’ target=‘‘nome da lifeline’’ />
-    <Message name=‘‘nome da mensagem’’ prob=‘‘valor da probabilidade’’ source=‘‘nome da lifeline’’ target=‘‘nome da lifeline’’ />
-    <Fragment name=‘‘nome do fragmento’’/>
-    <Message name=‘‘nome da mensagem’’ prob=‘‘valor da probabilidade’’ source=‘‘nome da lifeline’’ target=‘‘nome da lifeline’’ />
-    ...
-  </SequenceDiagram>
-
-  <SequenceDiagram name=‘‘atividade 2’’>
-    <Message name=‘‘nome da mensagem’’ prob=‘‘valor da probabilidade’’ source=‘‘nome da lifeline’’ target=‘‘nome da lifeline’’ />
-    <Message name=‘‘nome da mensagem’’ prob=‘‘valor da probabilidade’’ source=‘‘nome da lifeline’’ target=‘‘nome da lifeline’’ />
-    <Fragment name=‘‘nome do fragmento’’/>
-    <Message name=‘‘nome da mensagem’’ prob=‘‘valor da probabilidade’’ source=‘‘nome da lifeline’’ target=‘‘nome da lifeline’’ />
-    ...
-  </SequenceDiagram>
-
-  <SequenceDiagram name=‘‘nome do diagrama’’>
-    <Message name=‘‘nome da mensagem’’ prob=‘‘valor da probabilidade’’ source=‘‘nome da lifeline’’ target=‘‘nome da lifeline’’ />
-    <Message name=‘‘nome da mensagem’’ prob=‘‘valor da probabilidade’’ source=‘‘nome da lifeline’’ target=‘‘nome da lifeline’’ />
-    <Fragment name=‘‘nome do fragmento’’/>
-    <Message name=‘‘nome da mensagem’’ prob=‘‘valor da probabilidade’’ source=‘‘nome da lifeline’’ target=‘‘nome da lifeline’’ />
-    ...
-  </SequenceDiagram>
 """
 
 class Node:
