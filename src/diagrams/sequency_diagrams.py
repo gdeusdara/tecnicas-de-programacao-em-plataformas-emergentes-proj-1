@@ -18,6 +18,7 @@ class Message(SequenceElement):
         self.prob=prob
         self.source=source
         self.target=target
+            
 
 class Fragment:
     def __init__(self, name, representedBy):
@@ -45,24 +46,32 @@ class SequenceDiagrams():
             self.lifelines.append(lifeline)
 
         for element in diagram["Fagments"]:
-            fragment=Fragment(element["name"], element["representedBy"])
-            self.fragments.append(fragment)
+            try:
+                fragment=Fragment(element["name"], element["representedBy"])
+                self.fragments.append(fragment)
+            except:
+                raise Exception("EmptyOptionalFragment")
 
         for sequence_diagram in diagram["SequenceDiagrams"]:
+            try:            
+                elements=[]
+                for element in sequence_diagram["elements"]:
 
-            elements=[]
-            for element in sequence_diagram["elements"]:
+                    if element["type"] == "Fragment":
+                        node=FragmentReference(element["name"])
+                        elements.append(node)
 
-                if element["type"] == "Fragment":
-                    node=FragmentReference(element["name"])
-                    elements.append(node)
-
-                if element["type"] == "Message":
-                    node=Message(element["name"], element["message_type"], element["prob"], element["source"], element["target"])
-                    elements.append(node)
-            
-            this_diagram=SequenceDiagram(sequence_diagram["name"], sequence_diagram["guard_condition"], elements)
-            self.diagrams.append(this_diagram)
+                    if element["type"] == "Message":
+                        try:
+                            node=Message(element["name"], element["message_type"], element["prob"], element["source"], element["target"])
+                            elements.append(node)
+                        except:
+                            raise Exception("MessageFormatException")
+                
+                this_diagram=SequenceDiagram(sequence_diagram["name"], sequence_diagram["guard_condition"], elements)
+                self.diagrams.append(this_diagram)
+            except:
+                raise Exception("EmptyGuardConditionException")
 
 
     def getXml(self):
