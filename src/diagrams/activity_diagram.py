@@ -200,6 +200,9 @@ class ActivityDiagram:
  
         return None, 0
 
+    def getElements(self):
+        return self.elements
+
     def getXml(self):
         
         print('<ActivityDiagram name="{}">'.format(self.name))

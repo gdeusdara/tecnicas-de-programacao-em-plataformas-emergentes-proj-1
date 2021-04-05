@@ -12,6 +12,20 @@ def diagram_tool(activity_diagram, sequence_diagrams):
   diagram1=ActivityDiagram(activity_diagram)
   diagram2=SequenceDiagrams(sequence_diagrams)
 
+  elements=diagram1.getElements()
+  diagrams=diagram2.getDiagrams()
+
+  for element in elements:
+      if element.type == 'Activity':
+          found_diagram = False
+          for diagram in diagrams:
+              if diagram.name == element.name:
+                  found_diagram = True
+                  break
+          
+          if not found_diagram:
+              raise Exception("ActivityRepresentationException")
+
   diagram1.getXml()
   diagram2.getXml()
 
@@ -84,7 +98,7 @@ dict_sequence_diagram = {
     ],
     "SequenceDiagrams": [
       {
-        "name": "nome do diagrama",
+        "name": "nome da atividade",
         "guard_condition": "condição de guarda",
         "elements": [
             {
@@ -118,7 +132,7 @@ dict_sequence_diagram = {
         ],
       },
       {
-        "name": "nome do diagrama",
+        "name": "nome da atividade 2",
         "guard_condition": "condição de guarda",
         "elements": [
             {

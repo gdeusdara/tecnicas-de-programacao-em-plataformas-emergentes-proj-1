@@ -73,6 +73,9 @@ class SequenceDiagrams():
             except:
                 raise Exception("EmptyGuardConditionException")
 
+    def getDiagrams(self):
+        return self.diagrams
+
 
     def getXml(self):
         
